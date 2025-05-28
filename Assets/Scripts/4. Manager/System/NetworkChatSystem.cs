@@ -21,6 +21,12 @@ public class NetworkChatSystem : NetworkSingleton<NetworkChatSystem>
         ServerManager.RegisterBroadcast<ChatMessage>(ChatMessageRecived);
     }
 
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+        ServerManager.UnregisterBroadcast<ChatMessage>(ChatMessageRecived);
+    }
+
     private void ChatMessageRecived(NetworkConnection connection, ChatMessage message, Channel channel)
     {
         message.sender = message.sender == "" ? connection.ClientId.ToString() : message.sender;
@@ -31,6 +37,12 @@ public class NetworkChatSystem : NetworkSingleton<NetworkChatSystem>
     {
         base.OnStartClient();
         ClientManager.RegisterBroadcast<ChatMessage>(ChatMessageRecived);
+    }
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+        ClientManager.UnregisterBroadcast<ChatMessage>(ChatMessageRecived);
     }
 
     private void ChatMessageRecived(ChatMessage message, Channel channel)

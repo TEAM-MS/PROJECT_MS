@@ -9,6 +9,7 @@ public class ChatUI : MonoBehaviour
     [SerializeField] private GameObject chatMessagePrefab; // 채팅  UI 프리팹
     [SerializeField] private Transform chatRoot; // 채팅 부모 객체
     [SerializeField] private TMP_InputField chatInput; // 채팅 입력창
+    [SerializeField] private TMP_Text chatText; // 채팅 텍스트
     [SerializeField] private string playerNickname = "사람1"; // 플레이어 닉네임
 
     [Header("Settings")]
@@ -19,12 +20,12 @@ public class ChatUI : MonoBehaviour
 
     private static readonly string _clickSound = "Sound/UI/Click_06.mp3";
 
-    private void OnEnable()
+    private void Start()
     {
         NetworkChatSystem.OnChatMessageRecived += DisplayMessage;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         NetworkChatSystem.OnChatMessageRecived -= DisplayMessage;
     }
@@ -42,9 +43,10 @@ public class ChatUI : MonoBehaviour
             }
             else
             {
-                if (!string.IsNullOrWhiteSpace(chatInput.text)) // 채팅 입력창에 내용이 있으면 전송
+                string text = chatText.text.Replace("<u>", "").Replace("</u>", "");
+                if (!string.IsNullOrWhiteSpace(text)) // 채팅 입력창에 내용이 있으면 전송
                 {
-                    SendChatMessage(chatInput.text);
+                    SendChatMessage(text);
                     chatInput.text = "";
                 }
 

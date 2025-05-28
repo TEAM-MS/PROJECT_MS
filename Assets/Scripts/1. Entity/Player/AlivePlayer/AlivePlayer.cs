@@ -60,7 +60,7 @@ public class AlivePlayer : NetworkBehaviour, IDamageable
         EquipHandler = gameObject.GetOrAddComponent<EquipHandler>();
         EquipHandler.Setup(Inventory);
 
-                QuickSlotHandler = gameObject.GetOrAddComponent<QuickSlotHandler>();
+        QuickSlotHandler = gameObject.GetOrAddComponent<QuickSlotHandler>();
 
         ItemHandler = gameObject.GetOrAddComponent<ItemHandler>();
         PlacementHandler = gameObject.GetOrAddComponent<PlacementHandler>(); 
@@ -116,19 +116,6 @@ public class AlivePlayer : NetworkBehaviour, IDamageable
             return;
 
         stateMachine.Update();
-
-       // hungerPoint.Subtract(Time.deltaTime * 10f); // 추후 float 값 수정
-       // waterPoint.Subtract(Time.deltaTime * 0.5f);
-
-        if(Input.GetKeyDown(KeyCode.P)) // 테스트 코드
-        {
-            RestoreHunger(30f);
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(10, null); 
-        }
     }
 
 

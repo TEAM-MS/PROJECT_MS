@@ -678,5 +678,6 @@ MonoBehaviour:
   chatMessagePrefab: {fileID: 787785675900704257, guid: bf3266b19d74646a78aec2ddd9a713bd, type: 3}
   chatRoot: {fileID: 3532218734178346615}
   chatInput: {fileID: 5986108340201531341}
+  chatText: {fileID: 5637620136902789700}
   playerNickname: "\uC0AC\uB78C1"
   maxMessages: 8
